@@ -12,8 +12,8 @@ class ResConfigSettings(models.TransientModel):
     ollama_model = fields.Char("Ollama Model", default="llama3", config_parameter='odoo_ai_chatbot.ollama_model')
     ollama_api_key = fields.Char("Ollama API Key", config_parameter='odoo_ai_chatbot.ollama_api_key')
 
-    bedrock_aws_access_key = fields.Char("AWS Access Key", config_parameter='odoo_ai_chatbot.bedrock_aws_access_key')
-    bedrock_aws_secret_key = fields.Char("AWS Secret Key", config_parameter='odoo_ai_chatbot.bedrock_aws_secret_key')
+    bedrock_aws_access_key = fields.Char("AWS Access Key", config_parameter='odoo_ai_chatbot.bedrock_aws_access_key', password=True,)
+    bedrock_aws_secret_key = fields.Char("AWS Secret Key", config_parameter='odoo_ai_chatbot.bedrock_aws_secret_key', password=True,)
     bedrock_region = fields.Char("AWS Region", default="us-east-1", config_parameter='odoo_ai_chatbot.bedrock_region')
     bedrock_model = fields.Char("Bedrock Model ID", default="anthropic.claude-3-haiku-20240307-v1:0", config_parameter='odoo_ai_chatbot.bedrock_model')
     

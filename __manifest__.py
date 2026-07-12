@@ -10,7 +10,7 @@
     'author': 'Tarang Kushwaha',
     'website': 'https://tarang7651.github.io/',
     'external_dependencies': {
-        'python': ['langchain', 'langchain-community', 'langchain-aws', 'langgraph'],
+        'python': ['langchain', 'langchain-community', 'langchain-aws', 'langgraph', 'bleach'],
     },
     'depends': ['base', 'web'],
     'data': [

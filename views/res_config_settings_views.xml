@@ -33,7 +33,7 @@
                             <div class="content-group">
                                 <div class="row mt16">
                                     <label for="bedrock_aws_access_key" string="Access Key" class="col-lg-4 o_light_label"/>
-                                    <field name="bedrock_aws_access_key" class="col-lg-8"/>
+                                    <field name="bedrock_aws_access_key" class="col-lg-8" password="True"/>
                                 </div>
                                 <div class="row mt8">
                                     <label for="bedrock_aws_secret_key" string="Secret Key" class="col-lg-4 o_light_label"/>
