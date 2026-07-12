@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.odoo_ai_chatbot</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="AI Chatbot" string="AI Chatbot" name="odoo_ai_chatbot">
+                    <block title="AI Provider Configuration" name="ai_provider_setting_container">
+                        <setting string="Select Provider" help="Choose which AI backend to use.">
+                            <field name="ai_provider" widget="radio"/>
+                        </setting>
+                        
+                        <setting string="Ollama Settings" help="Configure your local or cloud Ollama instance." invisible="ai_provider != 'ollama'">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="ollama_base_url" string="Base URL" class="col-lg-4 o_light_label"/>
+                                    <field name="ollama_base_url" class="col-lg-8"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="ollama_model" string="Model Name" class="col-lg-4 o_light_label"/>
+                                    <field name="ollama_model" class="col-lg-8"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="ollama_api_key" string="API Key (Optional)" class="col-lg-4 o_light_label"/>
+                                    <field name="ollama_api_key" password="True" class="col-lg-8"/>
+                                </div>
+                            </div>
+                        </setting>
+
+                        <setting string="Amazon Bedrock Settings" help="Configure AWS Credentials and Bedrock model." invisible="ai_provider != 'bedrock'">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="bedrock_aws_access_key" string="Access Key" class="col-lg-4 o_light_label"/>
+                                    <field name="bedrock_aws_access_key" class="col-lg-8"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bedrock_aws_secret_key" string="Secret Key" class="col-lg-4 o_light_label"/>
+                                    <field name="bedrock_aws_secret_key" password="True" class="col-lg-8"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bedrock_region" string="AWS Region" class="col-lg-4 o_light_label"/>
+                                    <field name="bedrock_region" class="col-lg-8"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="bedrock_model" string="Model ID" class="col-lg-4 o_light_label"/>
+                                    <field name="bedrock_model" class="col-lg-8"/>
+                                </div>
+                            </div>
+                        </setting>
+
+                        <setting string="AI Behavior &amp; Constraints" help="Define the core instructions and personality of the AI Assistant." class="col-12 col-lg-12">
+                            <div class="content-group mt-2">
+                                <field name="ai_system_prompt" widget="text" class="w-100" style="min-height: 200px;"/>
+                            </div>
+                        </setting>
+
+                        <setting string="Chatbot Appearance" help="Customize the look of the chatbot.">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="ai_chat_color" string="Theme Color" class="col-lg-4 o_light_label"/>
+                                    <field name="ai_chat_color" widget="color" class="col-lg-8"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

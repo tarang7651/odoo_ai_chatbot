@@ -1,0 +1,4 @@
+langchain==0.1.13
+langchain-community==0.0.29
+langchain-aws==0.1.0
+langgraph==0.0.30

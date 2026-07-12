@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="odoo_ai_chatbot.SystrayItem" owl="1">
+        <div class="o_systray_ai_chatbot_item">
+            <!-- Systray Icon -->
+            <a class="dropdown-toggle o-no-caret" href="#" t-on-click.prevent="toggleChat" t-on-mouseenter="() => state.isHovered = true" t-on-mouseleave="() => state.isHovered = false">
+                <i class="fa fa-magic fa-fw" t-att-class="state.isHovered ? 'fa-spin' : ''" role="img" aria-label="AI Chatbot"/>
+            </a>
+
+            <!-- Floating Chat Widget -->
+            <div t-attf-class="ai-chat-widget {{ state.isMaximized ? 'maximized' : '' }}" t-if="state.isOpen">
+                <div class="ai-chat-header" t-attf-style="background: {{ state.chatColor }};">
+                    <div class="ai-chat-header-title">
+                        <i class="fa fa-bolt"></i> AI Assistant
+                    </div>
+                    <div class="ai-chat-actions">
+                        <button class="ai-chat-btn" title="New Chat" t-on-click="startNewChat">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <button class="ai-chat-btn" t-att-title="state.isMaximized ? 'Minimize' : 'Maximize'" t-on-click="toggleMaximize">
+                            <i t-attf-class="fa {{ state.isMaximized ? 'fa-compress' : 'fa-expand' }}"></i>
+                        </button>
+                        <button class="ai-chat-btn" title="Close" t-on-click="closeChat">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="ai-chat-messages" t-ref="messagesContainer">
+                    <t t-foreach="state.messages" t-as="msg" t-key="msg_index">
+                        <div t-attf-class="ai-message {{ msg.role === 'user' ? 'user-message' : 'assistant-message' }}">
+                            <div t-if="msg.role === 'assistant'" class="ai-avatar" t-attf-style="background: {{ state.chatColor }};">
+                                <i class="fa fa-magic"></i>
+                            </div>
+                            <div class="ai-message-bubble" t-attf-style="{{ msg.role === 'user' ? ('background: ' + state.chatColor + ';') : '' }}">
+                                <t t-out="msg.content"/>
+                            </div>
+                        </div>
+                    </t>
+                    <div t-if="state.isLoading" class="ai-message assistant-message">
+                        <div class="ai-avatar" t-attf-style="background: {{ state.chatColor }};">
+                            <i class="fa fa-magic"></i>
+                        </div>
+                        <div class="ai-message-bubble typing-indicator">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-chat-input-area">
+                    <textarea 
+                        class="ai-chat-input" 
+                        placeholder="Ask me anything about Odoo..."
+                        t-model="state.inputValue"
+                        t-on-keydown="onInputKeydown"
+                        rows="1">
+                    </textarea>
+                    <button class="ai-chat-send" t-on-click="sendMessage" t-att-disabled="state.isLoading || !state.inputValue.trim()" t-attf-style="background: {{ state.chatColor }};">
+                        <i class="fa fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
