@@ -26,6 +26,7 @@
             'odoo_ai_chatbot/static/src/components/chatbot/*.scss',
         ],
     },
+    'pre_init_hook': 'pre_init_check',
     'installable': True,
     'application': True,
     'license': 'LGPL-3',
